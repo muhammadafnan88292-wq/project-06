@@ -1,17 +1,13 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 
-function useCurrencyInfo (currency : number) {
-  
-  const [data, setData] = useState(null)
+function useCurrencyInfo(currency) {
+  const [data, setData] = useState({})
 
   useEffect(() => {
-    fetch(`https://v6.exchangerate-api.com/v6/d6f1d4e9017ac0aba1bced00/latest/${currency}`)
+    fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency}.json`)
      .then((res) => res.json())
-     .then((res) => setData(res.conversion_rates))
-     console.log(data);
-     
+     .then((res) => setData(res[currency]))
   }, [currency])
-console.log(data);
 
   return data
 }
